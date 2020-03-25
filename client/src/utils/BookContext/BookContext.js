@@ -6,7 +6,8 @@ const BookContext = createContext({
   input: '',
   book: {},
   handleInputChange: () => { },
-  handleSearchBook: () => { }
+  handleSearchBook: () => { },
+  handleSaveBook: (i) => { }
 });
 
 export default BookContext;
