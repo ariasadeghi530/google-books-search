@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BookContext from './utils/BookContext';
-import Form from './components/Form';
-import SearchCard from './components/SearchCard';
+import Search from './components/views/Search';
 import Book from './utils/Book'
 
 
@@ -36,13 +35,14 @@ bookState.handleSaveBook = (index) => {
 }
 
 bookState.handleDeleteBook = (index) => {
-  
+  let userBooks = JSON.parse(JSON.stringify(bookState.userBooks));
+  userBooks.splice(index, 1);
+  setBookState({... bookState, userBooks});
 }
  
   return (
     <BookContext.Provider value={bookState}>
-      <Form />
-      <SearchCard />
+     <Search />
     </BookContext.Provider>
   );
 }
