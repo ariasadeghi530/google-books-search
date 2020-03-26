@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BookContext from './utils/BookContext';
 import Search from './components/views/Search';
-import Book from './utils/Book'
+import Saved from './components/views/Saved';
+import Book from './utils/Book';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+
 
 
 function App() {
@@ -30,19 +33,43 @@ bookState.handleSaveBook = (index) => {
   let saveBook = JSON.parse(JSON.stringify(bookState.searchBooks[index]));
   let userBooks = JSON.parse(JSON.stringify(bookState.userBooks));
   userBooks.push(saveBook);
-  Book.create(saveBook);
-  setBookState({... bookState, userBooks})
+  Book.create(saveBook)
+  .then(() => {
+    setBookState({... bookState, userBooks})
+  })
+  .catch(e => console.error(e))
 }
 
-bookState.handleDeleteBook = (index) => {
+bookState.handleDeleteBook = (id ,index) => {
   let userBooks = JSON.parse(JSON.stringify(bookState.userBooks));
   userBooks.splice(index, 1);
-  setBookState({... bookState, userBooks});
+  Book.delete(id)
+  .then(() => {
+    setBookState({... bookState, userBooks});
+  })
+  .catch(e => console.error(e))
 }
  
+useEffect(()=> {
+  Book.read()
+  .then(({data}) => {
+    setBookState({...bookState, userBooks: data})
+  })
+  .catch(e => console.error(e))
+}, [])
+
   return (
     <BookContext.Provider value={bookState}>
-     <Search />
+  <Router>
+        <Switch>
+          <Route exact path="/">
+            <Search />
+          </Route>
+          <Route exact path="/saved">
+            <Saved />
+          </Route>
+        </Switch>
+      </Router>
     </BookContext.Provider>
   );
 }
