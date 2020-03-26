@@ -32,9 +32,9 @@ bookState.handleSearchBook = event => {
 bookState.handleSaveBook = (index) => {
   let saveBook = JSON.parse(JSON.stringify(bookState.searchBooks[index]));
   let userBooks = JSON.parse(JSON.stringify(bookState.userBooks));
-  userBooks.push(saveBook);
   Book.create(saveBook)
-  .then(() => {
+  .then((book) => {
+    userBooks.push(book);
     setBookState({... bookState, userBooks})
   })
   .catch(e => console.error(e))
@@ -53,6 +53,7 @@ bookState.handleDeleteBook = (id ,index) => {
 useEffect(()=> {
   Book.read()
   .then(({data}) => {
+    console.log("Use effect data", data);
     setBookState({...bookState, userBooks: data})
   })
   .catch(e => console.error(e))

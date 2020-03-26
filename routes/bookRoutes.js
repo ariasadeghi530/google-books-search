@@ -11,7 +11,7 @@ router.get('/books', (req, res) => {
 router.post('/books', (req, res) => {
   Book.create(req.body)
   .then((book) => {
-    res.sendStatus(200);
+    res.json(book);
   })
   .catch(e => console.error(e));
 })
