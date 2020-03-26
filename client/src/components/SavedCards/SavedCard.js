@@ -68,7 +68,7 @@ export default function SavedCard() {
         </CardContent>
         <CardActions>
        <Button href={book.infoLink} target="_blank" size="small">View on Google Books</Button>
-       <Button size="small"onClick={() => {handleDeleteBook(book._id, index);}}>Remove</Button>
+       <Button size="small"onClick={() => {handleDeleteBook(book._id, index)}}>Remove</Button>
        
      </CardActions>
       </div>

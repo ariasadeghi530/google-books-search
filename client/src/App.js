@@ -33,8 +33,8 @@ bookState.handleSaveBook = (index) => {
   let saveBook = JSON.parse(JSON.stringify(bookState.searchBooks[index]));
   let userBooks = JSON.parse(JSON.stringify(bookState.userBooks));
   Book.create(saveBook)
-  .then((book) => {
-    userBooks.push(book);
+  .then(({data}) => {
+    userBooks.push(data);
     setBookState({... bookState, userBooks})
   })
   .catch(e => console.error(e))
