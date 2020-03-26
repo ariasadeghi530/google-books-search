@@ -46,7 +46,7 @@ const {input, handleInputChange, handleSearchBook} = useContext(BookContext);
   variant="filled"
 />
 
-<Button variant="contained" color="primary" onClick={handleSearchBook}>Search</Button>
+<Button variant="contained" color="primary" onClick={handleSearchBook} onKeyDown={e => e.keyCode === 13 ? handleSearchBook : console.log('')}>Search</Button>
 
 </form>
 </Container>

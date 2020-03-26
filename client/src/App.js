@@ -21,7 +21,7 @@ setBookState({...bookState, [event.target.name]: event.target.value })
 
 bookState.handleSearchBook = event => {
   event.preventDefault();
-  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${bookState.input}&key=AIzaSyBZh-a4x_DWMuMSbODfA2Vh6fsls0dKA7E`)
+  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${bookState.input}&key=${process.env.apikey}`)
   .then(({data: {items}}) => {
     let booksInfo = items.map(elem => elem.volumeInfo);
     setBookState({... bookState, input: '', searchBooks: booksInfo});
@@ -53,7 +53,6 @@ bookState.handleDeleteBook = (id ,index) => {
 useEffect(()=> {
   Book.read()
   .then(({data}) => {
-    console.log("Use effect data", data);
     setBookState({...bookState, userBooks: data})
   })
   .catch(e => console.error(e))
