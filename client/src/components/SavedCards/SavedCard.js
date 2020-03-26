@@ -42,7 +42,7 @@ export default function SavedCard() {
    
     
   const {userBooks, handleDeleteBook} = useContext(BookContext);
-  console.log(userBooks);
+
   return (
     <Container className={classes.marginPls}>
       <Typography component='h3' variant='h3'>Saved Books</Typography>
