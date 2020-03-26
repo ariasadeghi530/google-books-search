@@ -46,7 +46,7 @@ const {input, handleInputChange, handleSearchBook} = useContext(BookContext);
   variant="filled"
 />
 
-<Button variant="contained" color="primary" onClick={e => handleSearchBook(e)}>Search</Button>
+<Button variant="contained" color="primary" onClick={handleSearchBook}>Search</Button>
 
 </form>
 </Container>
